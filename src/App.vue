@@ -1,32 +1,72 @@
+<!-- 컴포넌트 UI 정의, root element가 하나만 존재해야한다 -->
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-navigation-drawer app color="secondary" dark v-model="drawer">
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="text-h6"> Application </v-list-item-title>
+          <v-list-item-subtitle> with Vue + Vuetify </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list dense nav>
+        <v-list-item to="/">
+          <v-list-item-icon>
+            <v-icon>mdi-home-variant</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item to="/about">
+          <v-list-item-icon>
+            <v-icon>mdi-help-circle</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>About</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app color="primary" dark>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Vuetify</v-toolbar-title>
+    </v-app-bar>
+
+    <v-main>
+      <v-container fluid>
+        <router-view />
+      </v-container>
+    </v-main>
+
+    <!-- app : fixed 고정, dark : 글씨 색 흰색 -->
+    <v-footer app color="primary" dark>
+      <!-- x축 margin을 auto -->
+      <div class="mx-auto">Chenjae</div>
+    </v-footer>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+export default {
+  //컴포넌트의 대표이름 (devtools에 나오는 이름)
+  name: "App",
+  //추가하고 싶은 컴포넌트 등록
+  components: {},
+  //컴포넌트 데이터 정의
+  data: function () {
+    return {
+      drawer: false
+    };
+  },
+  //컴포넌트 메소드 정의
+  methods: {},
+};
+</script>
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<!-- 컴포넌트 스타일 정의 -->
+<style scoped></style>
